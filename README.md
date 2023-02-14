@@ -40,7 +40,7 @@ A client program will receive data from the server via the connection described 
 
 ---  
 ### UML Diagram
-[]("https://app.diagrams.net/#G1rhNfxV3fOm8d4GfJoe4c0wIohtXYOGJL")
+[]("https://github.com/julialoy/CS361_number_gen_microservice/blob/master/UML.jpg")
 ---  
 ### Additional Notes:
   * The server's default port is 5555. If a different port is needed, open the server_json_example.py file and change the PORT variable at the top of the file.
