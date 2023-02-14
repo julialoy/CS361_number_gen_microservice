@@ -20,12 +20,12 @@ The file server_json_example.py implements the microservice described above and 
 
 ### REQUESTing Data
 The server opens a socket via TCP on localhost on port 5555. To request data from the server:
-1. A client program should open a socket and establish a TCP connection via port 5555. Example using PyZMQ:   
+1. A client program should first establish a connection to localhost:5555. Example using PyZMQ's socket API:   
     ```python
     s = context.socket(zmq.REQ)
     s.connect("tcp://localhost:5555")
     ```
-2. Once the connection is established, the client program must send a message to the server indicating the client is requesting information. The message may be any string other than "q", encoded as a sequence of bytes. Below is an example using PyZMQ:   
+2. Once the connection is established, the client program must send a message to the server indicating the client is requesting information. The message may be any string other than "q", encoded as a sequence of bytes. Below is an example using PyZMQ's socket API:   
    ```python
    msg = "ready"
    s.send(msg.encode())
@@ -33,12 +33,15 @@ The server opens a socket via TCP on localhost on port 5555. To request data fro
 ---
 
 ### RECEIVing Data
-A client program will receive data from the server via the connected socket described above in **REQUESTing Data**. Data received will be a JSON object. Below is an example using PyZMQ:  
+A client program will receive data from the server via the connection described above in **REQUESTing Data**. Data received will be a JSON object. Below is an example using PyZMQ's socket API:  
    ```python
    data_recvd = client_sock.recv_json()
    ```
 
----
+---  
+### UML Diagram
+[]("https://app.diagrams.net/#G1rhNfxV3fOm8d4GfJoe4c0wIohtXYOGJL")
+---  
 ### Additional Notes:
   * The server's default port is 5555. If a different port is needed, open the server_json_example.py file and change the PORT variable at the top of the file.
   * To facilitate testing and troubleshooting, the server will terminate the connection and shut down if it receives the data ```b'q'``` (i.e., "q" encoded as a sequence of bytes) from the client. This can be disabled by commenting out the relevant code in server_json_example.py. The bit of code to comment out is clearly delimited by a comment header.
